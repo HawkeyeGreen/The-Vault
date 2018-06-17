@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The Vault", "The Vault\The Vault.csproj", "{8DD0F09C-99A2-4799-862C-F3A9CCEB08CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DD0F09C-99A2-4799-862C-F3A9CCEB08CC}.Debug|x86.ActiveCfg = Debug|x86
+		{8DD0F09C-99A2-4799-862C-F3A9CCEB08CC}.Debug|x86.Build.0 = Debug|x86
+		{8DD0F09C-99A2-4799-862C-F3A9CCEB08CC}.Release|x86.ActiveCfg = Release|x86
+		{8DD0F09C-99A2-4799-862C-F3A9CCEB08CC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54BCC0F6-052F-434C-ACD8-953382E9AFF7}
+	EndGlobalSection
+EndGlobal
