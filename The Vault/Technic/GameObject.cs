@@ -12,7 +12,6 @@ namespace The_Vault.Technic
         public string MyType
         {
             get;
-            set;
         }
         private long id;
         public long ID
@@ -20,10 +19,11 @@ namespace The_Vault.Technic
             get => id;
         }
 
-        public GameObject()
+        public GameObject(string type)
         {
             ID_counter++;
             id = ID_counter;
+            MyType = type;
         }
     }
 }
