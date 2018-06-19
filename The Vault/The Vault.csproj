@@ -45,6 +45,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Technic\GameObject.cs" />
+    <Compile Include="Technic\TextureManager.cs" />
     <Compile Include="World\Basics\Temperature.cs" />
     <Compile Include="World\Materials\BasicMaterial.cs" />
     <Compile Include="World\Materials\IMaterial.cs" />
