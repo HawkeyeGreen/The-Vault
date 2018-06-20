@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Runtime.InteropServices;
 
 namespace The_Vault.Technic
 {
@@ -19,41 +20,40 @@ namespace The_Vault.Technic
      */
     class TextureManager
     {
+        [DllImport("kernel32")]
+        static extern bool AllocConsole();
+
         private Dictionary<string, Texture2D> textureDictionary;
         private Dictionary<string, string> pathDictionary;
         static private TextureManager instance;
         static private ContentManager contentManager;
 
-        private TextureManager(ContentManager content)
+        private TextureManager()
         {
-            contentManager = content;
             textureDictionary = new Dictionary<string, Texture2D>();
             pathDictionary = new Dictionary<string, string>();
-
         }
 
         public void initialize(ContentManager content)
         {
-            instance = new TextureManager(content);
+            contentManager = content;
+            loadTexturePaths();
         }
 
-        public TextureManager getInstance()
+        public static TextureManager getInstance()
         {
             if(instance == null)
             {
-                throw new Exception("Der Texturemanager wurde noch nicht initialisiert. Stelle sicher, dass dieser Schritt vor dem Aufrufen der GetInstance-Methode erfolgt ist.");
+                instance = new TextureManager();
             }
-            else
-            {
-                return instance;
-            }
+            return instance;
         }
 
         public Texture2D GetTexture(string key)
         {
             if(textureDictionary.ContainsKey(key) == false)
             {
-                
+                textureDictionary.Add(key, contentManager.Load<Texture2D>(pathDictionary[key]));
             }
             return textureDictionary[key];
         }
@@ -64,12 +64,25 @@ namespace The_Vault.Technic
          */
         private void loadTexturePaths()
         {
-            string baseFolder = AppDomain.CurrentDomain.BaseDirectory + "/Content/textures";
-            string[] level0_texs = Directory.GetFiles(baseFolder, "*.png");
-            string[] level1 = Directory.GetDirectories(baseFolder);
-            foreach(string folder in level1)
-            {
+            //AllocConsole();
+            Console.WriteLine("Start: Laden der Texturen");
+            directoryDiveTexPaths(AppDomain.CurrentDomain.BaseDirectory + "/Content/textures");
+        }
 
+        private void directoryDiveTexPaths(string root)
+        {
+            string[] textures = Directory.GetFiles(root, "*.xnb");
+            foreach (string tex_path in textures)
+            {
+                FileInfo tex = new FileInfo(tex_path);
+                Console.WriteLine("Gefunden: " + tex.Name.Replace(".xnb", "") + " In Pfad: " + tex_path.Replace(".xnb", ""));
+                pathDictionary.Add(tex.Name.Replace(".xnb", ""), tex_path.Replace(".xnb", ""));
+            }
+            string[] folders = Directory.GetDirectories(root);
+            foreach (string folder in folders)
+            {
+                Console.WriteLine("Gehe zu Ordner: " + folder);
+                directoryDiveTexPaths(folder);
             }
         }
     }

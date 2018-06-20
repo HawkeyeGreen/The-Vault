@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using The_Vault.Technic;
 
 namespace The_Vault
 {
@@ -39,7 +40,7 @@ namespace The_Vault
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            TextureManager.getInstance().initialize(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -75,7 +76,9 @@ namespace The_Vault
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            spriteBatch.Draw(TextureManager.getInstance().GetTexture("Grass01"), new Vector2(0, 0), Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
