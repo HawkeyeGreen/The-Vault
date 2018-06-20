@@ -78,6 +78,8 @@ namespace The_Vault
 
             spriteBatch.Begin();
             spriteBatch.Draw(TextureManager.getInstance().GetTexture("Grass01"), new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(TextureManager.getInstance().GetTexture("Mich gibt es nicht"), new Vector2(16, 0), Color.White);
+            spriteBatch.Draw(TextureManager.getInstance().GetTexture("NotFound"), new Vector2(0, 16), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

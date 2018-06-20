@@ -89,6 +89,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\textures\technical\" />
     <Folder Include="Content\textures\tiles\base\" />
     <Folder Include="Content\textures\tiles\decals\" />
     <Folder Include="Content\textures\tiles\decorators\" />

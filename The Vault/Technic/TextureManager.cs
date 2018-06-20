@@ -53,7 +53,14 @@ namespace The_Vault.Technic
         {
             if(textureDictionary.ContainsKey(key) == false)
             {
-                textureDictionary.Add(key, contentManager.Load<Texture2D>(pathDictionary[key]));
+                if(pathDictionary.ContainsKey(key))
+                {
+                    textureDictionary.Add(key, contentManager.Load<Texture2D>(pathDictionary[key]));
+                }
+                else
+                {
+                    return GetTexture("NotFound");
+                }
             }
             return textureDictionary[key];
         }
