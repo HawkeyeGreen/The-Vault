@@ -67,6 +67,14 @@
     <Compile Include="Technic\GameObject.cs" />
     <Compile Include="Technic\TextureManager.cs" />
     <Compile Include="World\Basics\Temperature.cs" />
+    <Compile Include="World\Map\Localmap.cs" />
+    <Compile Include="World\Map\Regionalmap.cs" />
+    <Compile Include="World\Map\Tiles\Parteight.cs" />
+    <Compile Include="World\Map\Tiles\Quad.cs" />
+    <Compile Include="World\Map\Tiles\QuarterTile.cs" />
+    <Compile Include="World\Map\Tiles\Tile.cs" />
+    <Compile Include="World\Map\Tiles\Tileable.cs" />
+    <Compile Include="World\Map\Worldmap.cs" />
     <Compile Include="World\Materials\BasicMaterial.cs" />
     <Compile Include="World\Materials\IMaterial.cs" />
   </ItemGroup>
