@@ -70,6 +70,7 @@
     <Compile Include="World\Map\Decorators\Decorator.cs" />
     <Compile Include="World\Map\Localmap.cs" />
     <Compile Include="World\Map\Regionalmap.cs" />
+    <Compile Include="World\Map\Tiles\GasZone.cs" />
     <Compile Include="World\Map\Tiles\Parteight.cs" />
     <Compile Include="World\Map\Tiles\Quad.cs" />
     <Compile Include="World\Map\Tiles\QuarterTile.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="World\Map\Tiles\Tileable.cs" />
     <Compile Include="World\Map\Worldmap.cs" />
     <Compile Include="World\Materials\BasicMaterial.cs" />
+    <Compile Include="World\Materials\Gas.cs" />
     <Compile Include="World\Materials\IMaterial.cs" />
   </ItemGroup>
   <ItemGroup>

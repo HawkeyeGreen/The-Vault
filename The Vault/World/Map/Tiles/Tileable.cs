@@ -16,11 +16,15 @@ namespace The_Vault.World.Map.Tiles
         int PartialBlockGrade { get; set; }
         ITileable Parent { get; set; }
         IMaterial Ground { get; set; }
+        IMaterial Roof { get; }
+        ITileable RoofZone { get; set; }
+        GasZone Athmosphere { get; }
 
         void blockPosition(Vector2 position);
         ITileable getChild(Vector2 position);
         bool containsPosition(Vector2 position);
         void refreshBlockStatus();
-
+        IMaterial getRoofMaterial(Vector2 position);
+        void changeAthmossphereComposition(string mode, Gas gas);
     }
 }

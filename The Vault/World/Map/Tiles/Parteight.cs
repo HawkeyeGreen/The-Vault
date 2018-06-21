@@ -19,15 +19,20 @@ namespace The_Vault.World.Map.Tiles
         private string textureid = "NotFound";
         private bool fullBlock = false;
         private int partialBlock = 0;
-        private QuarterTile parentQuarter;
+        private ITileable parentQuarter; // Is a QuarterTile
+        private ITileable roofTile;
         private IMaterial ground;
+        private GasZone athmos;
 
         public Vector2 MyPosition { get => position; set => position = value; }
         public string TextureID { get => textureid; set => textureid = value; }
         public bool Blocked => fullBlock;
         public int PartialBlockGrade { get => partialBlock; set => partialBlock = value; }
-        public ITileable Parent { get => parentQuarter; set => parentQuarter = QuarterTile.createQuarterTilefromInterface(value); }
+        public ITileable Parent { get => parentQuarter; set => parentQuarter = value; }
         public IMaterial Ground { get => ground; set => ground = value; }
+        public IMaterial Roof { get => roofTile.Ground; }
+        public GasZone Athmosphere => athmos;
+        public ITileable RoofZone { get => roofTile; set => roofTile = value; }
 
         public Parteight(QuarterTile parentQuarter) : base("Part8")
         {
@@ -61,6 +66,16 @@ namespace The_Vault.World.Map.Tiles
         // Muss für das kleinste Element nicht aufgerufen werden, weil dessen BlockStatus stets der höchste ist
         public void refreshBlockStatus()
         {
+        }
+
+        public IMaterial getRoofMaterial(Vector2 position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void changeAthmossphereComposition(string mode, Gas gas)
+        {
+            throw new NotImplementedException();
         }
     }
 }
