@@ -86,6 +86,7 @@ namespace The_Vault.Technic
                 pathDictionary.Add(tex.Name.Replace(".xnb", ""), tex_path.Replace(".xnb", ""));
             }
             string[] folders = Directory.GetDirectories(root);
+            Console.WriteLine("Gefundende Ordner: " + folders.Length.ToString());
             foreach (string folder in folders)
             {
                 Console.WriteLine("Gehe zu Ordner: " + folder);

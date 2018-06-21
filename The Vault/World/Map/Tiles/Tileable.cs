@@ -12,7 +12,8 @@ namespace The_Vault.World.Map.Tiles
         Vector2 MyPosition { get; set; }
         string TextureID { get; set; }
         bool Blocked { get; }
-        int PartialBlockGrade { get; }
+        int PartialBlockGrade { get; set; }
+        ITileable Parent { get; set; }
 
         void blockPosition(Vector2 position);
         ITileable getChild(Vector2 position);
