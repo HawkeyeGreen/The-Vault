@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using The_Vault.Technic;
+using The_Vault.World.Materials;
 
 namespace The_Vault.World.Map.Tiles
 {
@@ -14,7 +15,6 @@ namespace The_Vault.World.Map.Tiles
         Tile parentTile;
 
 
-
         public Vector2 MyPosition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string TextureID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -22,6 +22,7 @@ namespace The_Vault.World.Map.Tiles
 
         public int PartialBlockGrade { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public ITileable Parent { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IMaterial Ground { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public QuarterTile() : base("QuarterTile")
         {
@@ -30,7 +31,7 @@ namespace The_Vault.World.Map.Tiles
 
         public static QuarterTile createQuarterTilefromInterface(ITileable quarter)
         {
-
+            return new QuarterTile();
         }
 
         public void blockPosition(Vector2 position)
