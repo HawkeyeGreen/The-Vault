@@ -12,7 +12,7 @@ namespace The_Vault
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -28,7 +28,10 @@ namespace The_Vault
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -77,9 +80,7 @@ namespace The_Vault
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(TextureManager.getInstance().GetTexture("Grass01"), new Vector2(0, 0), Color.White);
-            spriteBatch.Draw(TextureManager.getInstance().GetTexture("Mich gibt es nicht"), new Vector2(16, 0), Color.White);
-            spriteBatch.Draw(TextureManager.getInstance().GetTexture("NotFound"), new Vector2(0, 16), Color.White);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
