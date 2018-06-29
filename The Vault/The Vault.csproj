@@ -65,6 +65,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Technic\GameObject.cs" />
+    <Compile Include="Technic\Hermes.cs" />
     <Compile Include="Technic\TextureManager.cs" />
     <Compile Include="World\Basics\Temperature.cs" />
     <Compile Include="World\Map\Decorators\Decorator.cs" />
