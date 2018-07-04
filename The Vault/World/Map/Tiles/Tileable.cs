@@ -26,5 +26,6 @@ namespace The_Vault.World.Map.Tiles
         void refreshBlockStatus();
         IMaterial getRoofMaterial(Vector2 position);
         void changeAthmossphereComposition(string mode, Gas gas);
+        Parteight getAtPosition(Vector2 position);
     }
 }

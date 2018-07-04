@@ -8,10 +8,10 @@ namespace The_Vault.Technic
 {
     /* Hermes - General Purpose Messaging System
      * Hermes sammelt Zustandsmeldung etc. von beliebigen GameObjects und sammelt
-     * diese sowohl in einem geschriebenen Log als auch in einer Laufzeit-Sammlung verfügbar sind.
+     * diese sowohl in einem geschriebenen Log als auch in einer zur Laufzeit verfügbaren Sammlung.
      * 
      * Darüber hinaus stehen das HermesBlackboard für die Kommunikation zwischen verschiedenen Programmteilen
-     * und das PlayerMessage-Log zu Verfügung.
+     * und das PlayerMessage-Log zu Verfügung. Letzteres dient dafür Meldungen aufzunehmen, die für den SC relevant sind.
      * 
      */
     class Hermes

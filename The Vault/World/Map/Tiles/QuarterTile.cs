@@ -11,8 +11,12 @@ namespace The_Vault.World.Map.Tiles
 {
     class QuarterTile : GameObject, ITileable
     {
-        List<Tile> children;
-        Tile parentTile;
+        private List<Parteight> children;
+        private Vector2 rootPosition;
+        private Tile parentTile;
+        private int sideFormat = 1;
+
+
 
 
         public Vector2 MyPosition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -29,6 +33,11 @@ namespace The_Vault.World.Map.Tiles
         public ITileable RoofZone { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public GasZone Athmosphere => throw new NotImplementedException();
+
+        public Parteight getAtPosition(Vector2 position)
+        {
+            throw new NotImplementedException();
+        }
 
         public QuarterTile() : base("QuarterTile")
         {
