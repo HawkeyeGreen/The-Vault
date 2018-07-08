@@ -105,11 +105,17 @@ namespace The_Vault.World.Map.Tiles
 
         public void draw(SpriteBatch batch)
         {
+            if(textureid == "NotFound")
+            {
+                textureid = TextureManager.getInstance().getTextureIDFromAtlas("GrassAtlas01");
+                Console.WriteLine("Auswahl: " + textureid);
+            }
+            //textureid = "GrassAtlas01";
             if (map.visible(this))
             {
                 Vector2 drawPosition = map.relativeDrawPosition(helperVector);
-                drawPosition.X *= 8;
-                drawPosition.Y *= 8;
+                drawPosition.X *= 16;
+                drawPosition.Y *= 16;
                 batch.Draw(TextureManager.getInstance().GetTexture(textureid), drawPosition, Color.White);
             }
         }

@@ -49,21 +49,21 @@ namespace The_Vault
 
             quarters = new List<QuarterTile>();
 
-            for (int x  = 0; x < 10; x++)
+            for (int x  = 0; x < 100; x++)
             {
-                for(int y = 0; y < 10; y++)
+                for(int y = 0; y < 100; y++)
                 {
                     List<Parteight> upper = new List<Parteight>();
                     upper.Add(new Parteight(new Vector3(0 + x, 0 + y, 0), map));
-                    upper[0].TextureID = "Grass01";
+                    //upper[0].TextureID = "Grass01";
                     upper.Add(new Parteight(new Vector3(0 + x, 0 + y, 0), map));
-                    upper[1].TextureID = "Grass01";
+                    //upper[1].TextureID = "Grass01";
 
                     List<Parteight> lower = new List<Parteight>();
                     lower.Add(new Parteight(new Vector3(1 + x, 0 + y, 0), map));
                     lower.Add(new Parteight(new Vector3(1 + x, 0 + y, 0), map));
-                    lower[0].TextureID = "Grass01";
-                    lower[1].TextureID = "Grass01";
+                    //lower[0].TextureID = "Grass01";
+                    //lower[1].TextureID = "Grass01";
 
                     List<List<Parteight>> part8s = new List<List<Parteight>>();
                     part8s.Add(upper);
