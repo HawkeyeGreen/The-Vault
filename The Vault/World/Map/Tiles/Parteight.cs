@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using The_Vault.Technic;
 using The_Vault.World.Materials;
 
@@ -15,7 +16,8 @@ namespace The_Vault.World.Map.Tiles
 
     class Parteight : GameObject,ITileable
     {
-        private Vector2 position;
+        private Vector3 rootPosition;
+        private Vector2 helperVector;
         private string textureid = "NotFound";
         private bool fullBlock = false;
         private int partialBlock = 0;
@@ -23,8 +25,16 @@ namespace The_Vault.World.Map.Tiles
         private ITileable roofTile;
         private IMaterial ground;
         private GasZone athmos;
+        private GeneralMap map;
 
-        public Vector2 MyPosition { get => position; set => position = value; }
+        #region Fields
+        public Vector3 MyPosition { get => rootPosition;
+            set
+            {
+                rootPosition = value;
+                helperVector = new Vector2(value.X, value.Y);
+            }
+        }
         public string TextureID { get => textureid; set => textureid = value; }
         public bool Blocked => fullBlock;
         public int PartialBlockGrade { get => partialBlock; set => partialBlock = value; }
@@ -33,10 +43,15 @@ namespace The_Vault.World.Map.Tiles
         public IMaterial Roof { get => roofTile.Ground; }
         public GasZone Athmosphere => athmos;
         public ITileable RoofZone { get => roofTile; set => roofTile = value; }
+        public long GameID => ID;
+        public GeneralMap Map { get => map; set => map = value; }
+        #endregion
 
-        public Parteight(QuarterTile parentQuarter) : base("Part8")
+        public Parteight(Vector3 root, GeneralMap map) : base("Part8")
         {
-            this.parentQuarter = parentQuarter;
+            helperVector = new Vector2(root.X, root.Y);
+            this.map = map;
+            rootPosition = root;
         }
 
         public void blockPosition(Vector2 position)
@@ -47,7 +62,7 @@ namespace The_Vault.World.Map.Tiles
 
         public bool containsPosition(Vector2 position)
         {
-            if (MyPosition == position)
+            if (MyPosition == new Vector3(position, MyPosition.Z))
             {
                 return true;
             }
@@ -76,6 +91,27 @@ namespace The_Vault.World.Map.Tiles
         public void changeAthmossphereComposition(string mode, Gas gas)
         {
             throw new NotImplementedException();
+        }
+
+        public Parteight getAtPosition(Vector2 position)
+        {
+            return this;
+        }
+
+        public bool isBlocked(Vector2 position)
+        {
+            return Blocked;
+        }
+
+        public void draw(SpriteBatch batch)
+        {
+            if (map.visible(this))
+            {
+                Vector2 drawPosition = map.relativeDrawPosition(helperVector);
+                drawPosition.X *= 8;
+                drawPosition.Y *= 8;
+                batch.Draw(TextureManager.getInstance().GetTexture(textureid), drawPosition, Color.White);
+            }
         }
     }
 }

@@ -2,6 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using The_Vault.Technic;
+using The_Vault.World.Map.Tiles;
+using The_Vault.World.Map;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace The_Vault
 {
@@ -12,7 +21,10 @@ namespace The_Vault
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+        List<QuarterTile> quarters;
+        Localmap map;
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -28,10 +40,40 @@ namespace The_Vault
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             graphics.PreferredBackBufferHeight = 1080;
             graphics.PreferredBackBufferWidth = 1920;
             graphics.ApplyChanges();
+            map = new Localmap();
+            map.actualizeView(new Vector2(0, 0), graphics);
+
+            quarters = new List<QuarterTile>();
+
+            for (int x  = 0; x < 10; x++)
+            {
+                for(int y = 0; y < 10; y++)
+                {
+                    List<Parteight> upper = new List<Parteight>();
+                    upper.Add(new Parteight(new Vector3(0 + x, 0 + y, 0), map));
+                    upper[0].TextureID = "Grass01";
+                    upper.Add(new Parteight(new Vector3(0 + x, 0 + y, 0), map));
+                    upper[1].TextureID = "Grass01";
+
+                    List<Parteight> lower = new List<Parteight>();
+                    lower.Add(new Parteight(new Vector3(1 + x, 0 + y, 0), map));
+                    lower.Add(new Parteight(new Vector3(1 + x, 0 + y, 0), map));
+                    lower[0].TextureID = "Grass01";
+                    lower[1].TextureID = "Grass01";
+
+                    List<List<Parteight>> part8s = new List<List<Parteight>>();
+                    part8s.Add(upper);
+                    part8s.Add(lower);
+
+                    quarters.Add(new QuarterTile(part8s));
+                }
+            }
+            
+
             base.Initialize();
         }
 
@@ -65,9 +107,6 @@ namespace The_Vault
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -80,7 +119,10 @@ namespace The_Vault
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-
+            foreach(QuarterTile quarter in quarters)
+            {
+                quarter.draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

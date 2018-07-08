@@ -69,6 +69,7 @@
     <Compile Include="Technic\TextureManager.cs" />
     <Compile Include="World\Basics\Temperature.cs" />
     <Compile Include="World\Map\Decorators\Decorator.cs" />
+    <Compile Include="World\Map\GeneralMap.cs" />
     <Compile Include="World\Map\Localmap.cs" />
     <Compile Include="World\Map\Regionalmap.cs" />
     <Compile Include="World\Map\Tiles\GasZone.cs" />
