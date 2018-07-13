@@ -24,6 +24,8 @@ namespace The_Vault.Technic
             ID_counter++;
             id = ID_counter;
             MyType = type;
+
+            Hermes.getInstance().log(this, " Created.");
         }
     }
 }
