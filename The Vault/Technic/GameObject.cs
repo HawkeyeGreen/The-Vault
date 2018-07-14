@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeus.Hermes;
 
 namespace The_Vault.Technic
 {
-    abstract class GameObject
+    abstract class GameObject : HermesLoggable
     {
         static long ID_counter = 0;
         public string MyType
@@ -18,6 +19,8 @@ namespace The_Vault.Technic
         {
             get => id;
         }
+
+        public string Type => MyType;
 
         public GameObject(string type)
         {

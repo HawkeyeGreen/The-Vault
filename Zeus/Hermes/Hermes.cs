@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Runtime.InteropServices;
 
-namespace The_Vault.Technic
+namespace Zeus.Hermes
 {
     /* Hermes - General Purpose Messaging System
      * Hermes sammelt Zustandsmeldung etc. von beliebigen GameObjects und sammelt
@@ -16,7 +17,7 @@ namespace The_Vault.Technic
      * und das PlayerMessage-Log zu Verfügung. Letzteres dient dafür Meldungen aufzunehmen, die für den SC relevant sind.
      * 
      */
-    class Hermes
+    public class Hermes
     {
         private static Hermes instance = null;
 
@@ -26,23 +27,23 @@ namespace The_Vault.Technic
         private Object queueMainLogLock;
 
 
-        private Dictionary<GameObject, List<Tuple<string, GameObject>>> blackboard;
+        private Dictionary<HermesLoggable, List<Tuple<string, HermesLoggable>>> blackboard;
 
-        private Dictionary<GameObject, string> mainLog;
+        private Dictionary<HermesLoggable, string> mainLog;
         private HermesMainLogger mainLogger;
-        private Queue<Tuple<GameObject, string>> queueMainLog;
+        private Queue<Tuple<HermesLoggable, string>> queueMainLog;
         private Thread mainLogThread;
 
 
         private Hermes()
         {
-            blackboard = new Dictionary<GameObject, List<Tuple<string, GameObject>>>();
+            blackboard = new Dictionary<HermesLoggable, List<Tuple<string, HermesLoggable>>>();
             blackboardLock = new Object();
 
-            mainLog = new Dictionary<GameObject, string>();
+            mainLog = new Dictionary<HermesLoggable, string>();
             mainLogLock = new Object();
 
-            queueMainLog = new Queue<Tuple<GameObject, string>>();
+            queueMainLog = new Queue<Tuple<HermesLoggable, string>>();
             queueMainLogLock = new Object();
 
             mainLogger = new HermesMainLogger(AppDomain.CurrentDomain.BaseDirectory + "MainLog.txt", queueMainLog, queueMainLogLock);
@@ -67,31 +68,31 @@ namespace The_Vault.Technic
 
 
         #region BlackBoard
-        public void lodgeBlackboardMessage(GameObject sender, GameObject receiver, string message)
+        public void lodgeBlackboardMessage(HermesLoggable sender, HermesLoggable receiver, string message)
         {
             lock(blackboardLock)
             {
                 if (!blackboard.ContainsKey(receiver))
                 {
-                    blackboard.Add(receiver,new List<Tuple<string, GameObject>>());
+                    blackboard.Add(receiver,new List<Tuple<string, HermesLoggable>>());
                 }
-                blackboard[receiver].Add(new Tuple<string, GameObject>(message, sender));
+                blackboard[receiver].Add(new Tuple<string, HermesLoggable>(message, sender));
             }
 
-            Console.WriteLine("BlackboardMessage lodged from " + sender.ID.ToString() + " of type " + sender.MyType + " for " + receiver.ID.ToString() + "! Message" + message);
+            Console.WriteLine("BlackboardMessage lodged from " + sender.ID.ToString() + " of type " + sender.Type + " for " + receiver.ID.ToString() + "! Message" + message);
         }
 
-        public List<Tuple<string, GameObject>> getBlackBoardMessages(GameObject receiver)
+        public List<Tuple<string, HermesLoggable>> getBlackBoardMessages(HermesLoggable receiver)
         {
             lock (blackboardLock)
             {
-                List<Tuple<string, GameObject>> messages = blackboard[receiver];
+                List<Tuple<string, HermesLoggable>> messages = blackboard[receiver];
                 blackboard.Remove(receiver);
                 return messages;
             }
         }
 
-        public bool lookForBlackBoardMessages(GameObject receiver)
+        public bool lookForBlackBoardMessages(HermesLoggable receiver)
         {
             lock (blackboardLock)
             {
@@ -101,11 +102,11 @@ namespace The_Vault.Technic
         #endregion
 
         #region MainLog
-        public void log(GameObject sender, string entry)
+        public void log(HermesLoggable sender, string entry)
         {
             lock(queueMainLogLock)
             {
-                queueMainLog.Enqueue(new Tuple<GameObject, string>(sender, entry));
+                queueMainLog.Enqueue(new Tuple<HermesLoggable, string>(sender, entry));
             }
         }
         #endregion
@@ -125,14 +126,14 @@ namespace The_Vault.Technic
     {
         private StreamWriter writer;
         private Object queueLock;
-        private Queue<Tuple<GameObject, string>> queue;
+        private Queue<Tuple<HermesLoggable, string>> queue;
 
         private bool run = true;
         public bool Running { get => run; set => run = value; }
 
         public bool ended = false;
 
-        public HermesMainLogger(string filePath, Queue<Tuple<GameObject, string>> _Queue, Object Lock)
+        public HermesMainLogger(string filePath, Queue<Tuple<HermesLoggable, string>> _Queue, Object Lock)
         {
             if(File.Exists(filePath))
             {
@@ -159,12 +160,12 @@ namespace The_Vault.Technic
 
                 lock(queueLock)
                 {
-                    Tuple<GameObject, string> entry = queue.Dequeue();
+                    Tuple<HermesLoggable, string> entry = queue.Dequeue();
                     if(entry.Item2 == "ShutdownSignal")
                     {
                         Running = false;
                     }
-                    string logEntry = entry.Item1.ID.ToString() + " | " + entry.Item1.MyType + ": " + entry.Item2;
+                    string logEntry = entry.Item1.ID.ToString() + " | " + entry.Item1.Type + ": " + entry.Item2;
                     Console.WriteLine(logEntry);
                     writer.WriteLine(logEntry);
                 }

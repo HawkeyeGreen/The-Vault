@@ -65,8 +65,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Technic\GameObject.cs" />
-    <Compile Include="Technic\Hermes.cs" />
-    <Compile Include="Technic\SystemObject.cs" />
     <Compile Include="Technic\TextureManager.cs" />
     <Compile Include="World\Basics\Temperature.cs" />
     <Compile Include="World\Map\Decorators\Decorator.cs" />
@@ -118,6 +116,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zeus\Zeus.csproj">
+      <Project>{068e5f04-d5ec-4daa-a8fa-46fed3f2b708}</Project>
+      <Name>Zeus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

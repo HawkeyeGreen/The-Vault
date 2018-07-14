@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace The_Vault.Technic
+namespace Zeus.Hermes
 {
-    class SystemObject : GameObject
+    public interface HermesLoggable
     {
-        public SystemObject() : base("System")
-        {
-
-        }
+        long ID { get; }
+        string Type { get; }
     }
 }
